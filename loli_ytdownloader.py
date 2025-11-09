@@ -31,11 +31,11 @@ BODY_FONT_SIZE = 10
 CODE_VERSION = "Loli YTDownloader V0.6.3" # <<< อัปเดตเป็น V0.6.3
 DEVELOPER_NAME = "Nakano Tabasa"
 
-# V0.6.3: Update Configuration (Fixed GitHub URL)
-# *** URL สำหรับดึงไฟล์ JSON จาก Repository ของคุณ ***
+# V0.6.3: Update Configuration (Fixed GitHub URL & Single Channel)
+# *** URL สำหรับดึงไฟล์ JSON จาก Repository ของโอนี่จัง ***
 GITHUB_UPDATE_JSON_URL = "https://raw.githubusercontent.com/shiawasenanami/Loli-YTDownloder/main/latest_version.json" 
 
-DEV_PASSWORD = "lolinakano001"   # รหัสผ่านผู้พัฒนาสำหรับเข้าถึง Beta
+# DEV_PASSWORD = "lolinakano001" # <<< ถูกนำออกแล้ว
 
 # V0.5.2: FFMPEG Fixed Path Configuration
 FFMPEG_DIR = r"C:\Users\shiaw\Desktop\LoliYTDownloader\database"
@@ -55,7 +55,7 @@ main_progressbar = None
 # V0.2.7 PATCH: กำหนดค่าเริ่มต้นสำหรับ Download Folder ไปที่ Desktop
 DEFAULT_DOWNLOAD_FOLDER = str(Path.home() / "Desktop" / "LoliDownload") 
 
-# B. ฟังก์ชันตรวจสอบ FFMPEG (ไม่เปลี่ยนแปลง)
+# B. ฟังก์ชันตรวจสอบ FFMPEG
 def check_ffmpeg_encoders():
     """ตรวจสอบว่า ffmpeg.exe อยู่ใน Fixed Path ที่ผู้ใช้กำหนดหรือไม่"""
     global FFMPEG_AVAILABLE
@@ -64,7 +64,7 @@ def check_ffmpeg_encoders():
     else:
         FFMPEG_AVAILABLE = False
 
-# C. ฟังก์ชันช่วย: จัดการชื่อไฟล์ซ้ำ (ไม่เปลี่ยนแปลง)
+# C. ฟังก์ชันช่วย: จัดการชื่อไฟล์ซ้ำ
 def get_non_conflicting_path(original_path):
     """Generates a non-conflicting path by appending a number if the file exists."""
     if not os.path.exists(original_path):
@@ -78,7 +78,7 @@ def get_non_conflicting_path(original_path):
             return new_path
         counter += 1
 
-# D. ฟังก์ชันเลือกโฟลเดอร์ (ไม่เปลี่ยนแปลง)
+# D. ฟังก์ชันเลือกโฟลเดอร์
 def browse_folder():
     """เปิดกล่องโต้ตอบให้ผู้ใช้เลือกโฟลเดอร์สำหรับบันทึกไฟล์"""
     global download_folder, folder_label
@@ -91,7 +91,7 @@ def browse_folder():
     else:
         folder_label.config(text=f"📂 โฟลเดอร์ที่เลือก: {download_folder}")
 
-# E. ฟังก์ชัน Callback สำหรับแสดงความคืบหน้า (ไม่เปลี่ยนแปลง)
+# E. ฟังก์ชัน Callback สำหรับแสดงความคืบหน้า
 def on_progress(stream, chunk, bytes_remaining):
     """Callback function ที่ Pytube เรียกใช้เมื่อดาวน์โหลดแต่ละก้อน พร้อมอัปเดต Progressbar"""
     total_size = stream.filesize
@@ -108,7 +108,7 @@ def on_progress(stream, chunk, bytes_remaining):
     progress_label.config(text=f"📈 ดาวน์โหลด: {percentage_of_completion:.2f}%")
     root.update()
 
-# F. ฟังก์ชันรวมไฟล์ภาพและเสียงด้วย FFMPEG (ไม่เปลี่ยนแปลง)
+# F. ฟังก์ชันรวมไฟล์ภาพและเสียงด้วย FFMPEG
 def combine_files(video_path, audio_path, output_path, output_format="mp4"):
     """ใช้ FFMPEG เพื่อรวมไฟล์วิดีโอและไฟล์เสียงเข้าด้วยกัน โดยใช้ FFMPEG_EXE (Fixed Path)"""
     global progress_label, root, messagebox, FFMPEG_EXE
@@ -156,7 +156,7 @@ def combine_files(video_path, audio_path, output_path, output_format="mp4"):
         return False
 
 
-# G. ฟังก์ชันหลัก: ดาวน์โหลดวิดีโอ/เสียง (ไม่เปลี่ยนแปลง)
+# G. ฟังก์ชันหลัก: ดาวน์โหลดวิดีโอ/เสียง
 def download_task(url, mode, selected_video_format, selected_audio_format):
     """ฟังก์ชันจัดการการดาวน์โหลดหลัก พร้อมจัดการ Progress Bar"""
     
@@ -361,7 +361,7 @@ def download_video():
 # H. ฟังก์ชันแสดงข้อมูล (V0.6.3 - อัปเดต Log)
 def show_about_info():
     """แสดงข้อมูลเกี่ยวกับนักพัฒนาและประวัติเวอร์ชัน"""
-    global CODE_VERSION, DEVELOPER_NAME, FFMPEG_DIR, DEV_PASSWORD
+    global CODE_VERSION, DEVELOPER_NAME, FFMPEG_DIR
     about_text = f"""
     --- **{CODE_VERSION}** ---
     
@@ -371,12 +371,12 @@ def show_about_info():
     **✨ What's New in {CODE_VERSION}:**
     ======================================
     
+    * **Single Release Channel (V0.6.3):** ปรับปรุงการตรวจสอบอัปเดตให้เหลือเพียง **Stable/Release** Channel เดียวเท่านั้น
     * **Fixed GitHub URL (V0.6.3):** แก้ไขและกำหนด URL การตรวจสอบอัปเดต GitHub ให้ชี้ไปที่:
       `{GITHUB_UPDATE_JSON_URL}`
       (ต้องสร้างไฟล์ `latest_version.json` ใน Root ของ Repository)
       
     * **GitHub Update Integration (V0.6.2):** ปรับปรุงฟังก์ชันอัปเดตให้เชื่อมต่อกับ GitHub URL เพื่อตรวจสอบเวอร์ชันล่าสุด
-    * **New Dev Password (V0.6.1):** เปลี่ยนรหัสผ่านสำหรับเข้าถึงการตรวจสอบอัปเดต Beta เป็น **`{DEV_PASSWORD}`**
     
     ======================================
     **📜 ประวัติการอัปเดต (Log History):**
@@ -398,8 +398,8 @@ def open_url_in_browser(url):
     except Exception as e:
         messagebox.showerror("Error", f"ไม่สามารถเปิดเบราว์เซอร์ได้: {e}")
 
-# I. ฟังก์ชันตรวจสอบอัปเดต (V0.6.2: GitHub Integration)
-def check_for_updates_thread(is_beta_check=False):
+# I. ฟังก์ชันตรวจสอบอัปเดต (Single Channel)
+def check_for_updates_thread():
     """ฟังก์ชันหลักสำหรับตรวจสอบอัปเดตจาก GitHub ใน Thread แยก"""
     
     global status_label, progress_label, root, CODE_VERSION, GITHUB_UPDATE_JSON_URL
@@ -422,17 +422,13 @@ def check_for_updates_thread(is_beta_check=False):
     # 2. เปรียบเทียบเวอร์ชัน
     current_version_str = CODE_VERSION.split()[-1] 
     
-    if is_beta_check:
-        LATEST_VERSION = update_info.get("beta_version", "N/A")
-        UPDATE_URL = update_info.get("beta_url", "")
-        version_type = "Beta (Dev)"
-    else:
-        LATEST_VERSION = update_info.get("stable_version", "N/A")
-        UPDATE_URL = update_info.get("stable_url", "")
-        version_type = "Stable (Public)"
+    # Logic for single channel (Stable/Release)
+    LATEST_VERSION = update_info.get("stable_version", "N/A")
+    UPDATE_URL = update_info.get("stable_url", "")
+    version_type = "Release (Stable)" 
     
     
-    # Simple version comparison (V0.6.2 > V0.6.1)
+    # Simple version comparison (V0.6.3 > V0.6.2)
     if LATEST_VERSION == "N/A" or LATEST_VERSION == current_version_str:
         status_label.config(text=f"✅ โปรแกรมเป็นเวอร์ชันล่าสุด ({version_type}) แล้ว!", fg="green")
         progress_label.config(text=f"เวอร์ชันปัจจุบัน: {current_version_str}")
@@ -455,56 +451,14 @@ def check_for_updates_thread(is_beta_check=False):
                  status_label.config(text="❌ ไม่พบลิงก์อัปเดต", fg="red")
     
 
-def start_update_in_thread(is_beta_check=False):
+def start_update_in_thread():
     """เริ่มต้นการตรวจสอบอัปเดตใน Thread แยก เพื่อไม่ให้ GUI ค้าง"""
-    thread = threading.Thread(target=check_for_updates_thread, args=(is_beta_check,))
+    # Removed is_beta_check parameter
+    thread = threading.Thread(target=check_for_updates_thread)
     thread.start()
 
-def ask_for_dev_password():
-    """Shows a dialog to ask for the Developer Password before starting Beta check."""
-    global root, DEV_PASSWORD, DEFAULT_FONT_NAME, BODY_FONT_SIZE
-    
-    # 1. สร้างหน้าต่าง Toplevel (Dialog)
-    dialog = tk.Toplevel(root)
-    dialog.title("🔒 รหัสผ่าน Dev")
-    dialog.geometry("300x150")
-    dialog.transient(root) 
-    dialog.grab_set() # Block main window
-    
-    dialog.grid_columnconfigure(0, weight=1)
-    
-    # 2. ข้อความแนะนำ
-    tk.Label(dialog, text="สำหรับตรวจสอบอัปเดต Beta เท่านั้น", 
-             font=(DEFAULT_FONT_NAME, BODY_FONT_SIZE)).grid(row=0, column=0, pady=10)
-             
-    # 3. ช่องใส่รหัสผ่าน
-    password_entry = tk.Entry(dialog, show="*", width=30, font=(DEFAULT_FONT_NAME, BODY_FONT_SIZE))
-    password_entry.grid(row=1, column=0, pady=5, padx=20, sticky='ew')
-    
-    def check_password_and_start():
-        if password_entry.get() == DEV_PASSWORD:
-            dialog.destroy()
-            start_update_in_thread(is_beta_check=True)
-        else:
-            messagebox.showerror("รหัสผ่านไม่ถูกต้อง", "❌ รหัสผ่านผู้พัฒนาไม่ถูกต้อง")
-            password_entry.delete(0, tk.END) 
-            # Focus back to dialog/entry
-            dialog.lift()
-            password_entry.focus_set()
 
-    # 4. ปุ่มยืนยัน
-    confirm_button = tk.Button(dialog, text="ยืนยัน", command=check_password_and_start, 
-                               bg="#008CBA", fg="white", font=(DEFAULT_FONT_NAME, BODY_FONT_SIZE, "bold"))
-    confirm_button.grid(row=2, column=0, pady=10)
-    
-    # 5. Event Binding (Enter key)
-    password_entry.bind('<Return>', lambda event=None: check_password_and_start())
-    dialog.protocol("WM_DELETE_WINDOW", dialog.destroy) 
-    password_entry.focus_set() # Set initial focus
-    root.wait_window(dialog) # Wait until dialog is closed
-
-
-# J. การตั้งค่า Menu Bar (ไม่เปลี่ยนแปลง)
+# J. การตั้งค่า Menu Bar
 def setup_menu_bar():
     """สร้างและตั้งค่า Menu Bar พร้อมกำหนด Font"""
     global root, DEFAULT_FONT_NAME, BODY_FONT_SIZE
@@ -521,13 +475,11 @@ def setup_menu_bar():
     file_menu.add_separator()
     file_menu.add_command(label="ออก", command=root.quit)
     
-    # 2. อัปเดตเมนู (V0.6.0: Split Update)
+    # 2. อัปเดตเมนู (Single Channel)
     update_menu = tk.Menu(menubar, tearoff=0, font=menu_font)
     menubar.add_cascade(label="อัปเดต", menu=update_menu)
-    # Stable Check: No password needed
-    update_menu.add_command(label="ตรวจสอบอัปเดต Stable", command=lambda: start_update_in_thread(is_beta_check=False))
-    # Beta Check: Password needed
-    update_menu.add_command(label="ตรวจสอบอัปเดต Beta (Dev Only)", command=ask_for_dev_password)
+    # Only one command remains
+    update_menu.add_command(label="ตรวจสอบอัปเดต Release", command=start_update_in_thread)
     
     # 3. เกี่ยวกับเมนู 
     help_menu = tk.Menu(menubar, tearoff=0, font=menu_font)
@@ -535,7 +487,7 @@ def setup_menu_bar():
     help_menu.add_command(label="ข้อมูล & ประวัติเวอร์ชัน", command=show_about_info)
 
 
-# K. ฟังก์ชันควบคุมการซ่อน/แสดงรูปแบบไฟล์ (ไม่เปลี่ยนแปลง)
+# K. ฟังก์ชันควบคุมการซ่อน/แสดงรูปแบบไฟล์
 def update_format_visibility(*args):
     """Shows the appropriate format selection frame (Video or Audio) based on the download_mode."""
     global download_mode, video_format_frame, audio_format_frame
@@ -554,7 +506,7 @@ def update_format_visibility(*args):
         video_format_frame.grid_forget()
 
 
-# L. ส่วนของการสร้าง GUI ด้วย Tkinter และเริ่มโปรแกรม (ไม่เปลี่ยนแปลงในส่วน UI)
+# L. ส่วนของการสร้าง GUI ด้วย Tkinter และเริ่มโปรแกรม
 def start_application():
     """ฟังก์ชันหลักที่รัน GUI"""
     
