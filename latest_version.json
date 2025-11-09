@@ -1,4 +1,12 @@
 {
-  "stable_version": "V0.7.0",
-  "stable_url": "https://github.com/shiawasenanami/Loli-YTDownloder/releases/download/V0.7.0/LoliYTDownloader_V0.7.0_Release.zip"
+    "version": "V0.7.1",
+    "notes": [
+        "✨ NEW: เพิ่มรูปแบบเสียง Lossless (WAV, FLAC)",
+        "✨ NEW: เพิ่มตัวเลือก Bitrate สำหรับ MP3 (สูงสุด 320k)",
+        "✨ NEW: เพิ่มรูปแบบวิดีโอ MKV (บังคับรวมไฟล์ผ่าน FFMPEG)",
+        "✅ FIX: ปรับปรุงโครงสร้างโค้ดสำหรับ Audio/Video Stream Selection",
+        "✅ FIX: แก้ไขบั๊กย่อยและการจัดการ FFMPEG"
+    ],
+    "zip_url": "https://github.com/shiawasenanami/Loli-YTDownloder/releases/download/v0.7.1/Loli.YTDownloader.v0.7.1.zip",
+    "release_date": "2025-11-09"
 }
