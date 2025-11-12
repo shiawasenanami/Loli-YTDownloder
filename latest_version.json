@@ -1,5 +1,11 @@
 {
-    "version": "V0.8.1",
-    "description": "Critical Bug Fix: แก้ไขข้อผิดพลาด 'WritingPostProcessorPP' ที่เกิดขึ้นเมื่อดาวน์โหลดวิดีโอจาก TikTok และ Instagram เพื่อเพิ่มความเสถียรในการใช้งาน Multi-Platform.\n\n[NEW]: เปลี่ยนชื่อโปรแกรมเป็น Loli MediaDownloader Ultimate และเพิ่มแถบแสดงชื่อ/เวอร์ชัน/นักพัฒนาที่ด้านล่างของหน้าต่าง.",
-    "zip_url": "https://github.com/shiawasenanami/Loli-YTDownloder/releases/download/v0.8.1/Loli-MediaDownloader-Ultimate-V0.8.1.zip"
+    "version": "1.0.4",
+	"program_name": "Loli YTDownload Ultimate",
+	"release_date": "2025-11-12",
+	"developer": "Nakano Tabasa",
+	"title_th": "Loli YTDownload Ultimate V1.0.4 (อัปเดตความเสถียร)",
+	"title_en": "Loli YTDownload Ultimate V1.0.4 (Stability Update)",
+	"description_th": "การอัปเดตนี้มุ่งเน้นที่การแก้ไขข้อผิดพลาดเล็กน้อยและเพิ่มความเสถียรของโปรแกรมให้ดียิ่งขึ้น หลังจากการทดสอบ Build EXE สำเร็จ",
+    "description_en": "This update focuses on minor bug fixes and improving overall program stability following the successful EXE build test.",
+    "zip_url": "https://github.com/shiawasenanami/Loli-YTDownloder/releases/download/Loli-MediaDownloader-Ultimate_v1.0.4/Loli-YTDownload-Ultimate-v1.0.4.zip"
 }
